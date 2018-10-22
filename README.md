@@ -31,3 +31,16 @@ Then run
 ```
 npm test
 ```
+# Using Docker compose
+
+docker-compose -f docker-compose.v4.yml up
+
+# Using Docker compose with Kubernetes
+
+docker build grafana/ -t $GRAFANA:latest
+
+docker stack deploy --compose-file docker-compose.v3.yml lighthouse
+
+kubectl proxy
+
+http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/overview?namespace=default

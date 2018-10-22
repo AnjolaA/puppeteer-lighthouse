@@ -3,10 +3,6 @@ version: '3'
 services:
   influxdb:
     image: influxdb:1.6.3
-    container_name: influxdb
-    # volumes:
-    # Data persistency
-    # - /Users/aaw05/Misc:/var/lib/influxdb
     ports:
       - "8086:8086"
     command: ["influxd"]
@@ -18,18 +14,12 @@ services:
       timeout: 30s
       retries: 5
   grafana:
-    # image: grafana/grafana
     image: anjola:grafana
-    container_name: grafana
     ports:
       - "3000:3000"
     environment:
       OUTPUT_INFLUXDB_ENABLED: "true"
       INFLUXDB_URL: "http://influxdb:8086"
-    links:
-      - influxdb
-    depends_on:
-      - influxdb
     healthcheck:
       test: ["CMD", "echo", ">", "/dev/tcp/localhost/3000", "||", "exit", "1"]
       interval: 30s
