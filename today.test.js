@@ -16,7 +16,7 @@ describe('Running performance tests using lighthouse', () => {
         browser = await puppeteer.launch({ slowMo: 0, headless: false });
         page = await browser.newPage();
         await page.goto(URL);
-        await page.close();
+        // await page.close();
         const browserWSEndpoint = browser.wsEndpoint();
 
         const thePort = await getPort(browserWSEndpoint);
@@ -31,6 +31,7 @@ describe('Running performance tests using lighthouse', () => {
         await page.close();
         await browser.close();
     });
+
     test('should generate results', async () => {
         expect(results).not.toBe(null);
     });
